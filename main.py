@@ -9,6 +9,7 @@ import database
 from states import RegistrationStates
 import keyboards
 from aiogram.dispatcher import FSMContext
+from keep_alive import keep_alive
 
 # Logging sozlash
 logging.basicConfig(level=logging.INFO)
@@ -236,6 +237,7 @@ async def check_subscription(callback: types.CallbackQuery):
         await callback.answer("Hali obuna bo'lmagansiz!", show_alert=True)
 
 if __name__ == '__main__':
+    keep_alive()  # Flask serverni ishga tushirish
     loop = asyncio.get_event_loop()
     loop.run_until_complete(database.init_db())
     executor.start_polling(dp, skip_updates=True)
